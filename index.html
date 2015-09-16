@@ -1,52 +1,272 @@
 <!doctype html>
-<html>
+<html lang="en">
+
 	<head>
-
 		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="chrome=1">
-		<title>reveal.js - The HTML Presentations Framework</title>
 
-		<link rel="stylesheet" href="css/normalize.css">
-		<link rel="stylesheet" href="css/main.css">
+		<title>Research Data Management: The Asian Seabass genome at SANBI</title>
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="Research Data Management: The Asian Seabass genome at SANBI">
+		<meta name="author" content="Peter van Heusden (pvh@sanbi.ac.za)">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
 
 		<!--[if lt IE 9]>
-		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
-
 	</head>
+
 	<body>
-		<div class="wrapper">
 
-			<header>
+<!--
 
-				<h1>reveal.js</h1>
-				<p>
-					The HTML Presentation Framework &mdash; Site coming soon
-				</p>
+http://www.slideshare.net/moJoe/discovery-and-analysis-capability-model
+http://www.iaas.uni-stuttgart.de/forschung/projects/simtech/project_flexibility.php
+http://cacm.acm.org/blogs/blog-cacm/169199-data-science-workflow-overview-and-challenges/fulltext
 
-			</header>
+knocking down the skittles:
+The Galaxy Community Conference 2015
 
-			<footer>
+Conceptual Model of a workflow system:
+1. Compose
+2. Map
+3. Execute
+4. Store/Visualise/Interface
 
-				<p>
-					<a href="http://lab.hakim.se/reveal-js">Try the demo</a>
-					<a href="https://github.com/hakimel/reveal.js/releases">Download</a>
-				</p>
 
-			</footer>
+Compose: 
+1. 
+-->
+
+		<div class="reveal">
+			<div class="slides">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<section>
+			<p><img width="30%" style="align: left; border: 0px; box-shadow: 0 0 0 0; vertical-align: middle" src="images/gcc2015_logo.png"/></p>
+			<h2>Galaxy Community Conference 2015</h2>
+
+			<small>Peter van Heusden (pvh@sanbi.ac.za)</small>
+			</section>
+			<section>
+			<img style="border: 0px; box-shadow: 0 0 0 0; vertical-align: middle" src="images/LifeCycle.png"/>
+			<aside class="notes">
+			* Background: what do we want?
+			* Scientist-centric software
+			* Support iterative development
+			* Record provenance of data
+			* Map scientific enquiry to computing resources
+			</aside>
+			</section>
+			<section>
+			<img src="images/galaxy_default.png"/>
+			<aside class="notes">
+			* Galaxy analysis model is a workbench with tools down the left
+			* and results on the right
+			* Restricted to the set of tools provided by the Galaxy administrator
+			* Adding a tool requires admin privileges and "tool XML"
+			</aside>
+			</section>
+
+			<section>
+			<img src="images/ipython_in_galaxy.png"/>
+			<aside class="notes">
+			* Enter Interactive Environment
+			* IPython available, R planned
+			* IPython notebook with straightforward interface to Galaxy datasets, can call back into Galaxy using BioBlend API
+			* Behind the scenes notebook is encapsulated in Docker container
+			* Downside: analysis is not a tool, and cannot be used elsewhere in Galaxy
+			</aside>
+			</section>
+
+			<section>
+			<img src="images/progressivemauve.png"/>
+			<aside class="notes">
+			* Galaxy tool building is "an art, not a science"
+			* Tools combine XML and Cheetah templates
+			* Complexity is hard to avoid, but
+			* Planemo provides tools for automating linting tool, testing and publishing to toolshed
+			</aside>
+			</section>
+
+			<section>
+			<img src="images/planemo.jpg"/>
+			<aside class="notes">
+			* Planemo is a command line tool for working with Galaxy tools
+			* Mostly allows for following "best practice" in tool building
+			* Sticking point: tool dependencies
+			* Galaxy tool dependency spec is effectively a build descriptor
+			* Like Maven, NPM, Homebrew
+			* Talk within the Galaxy community is to move towards Homebrew / Linuxbrew as package manager
+			</aside>
+			</section>
+
+			<section>
+			<img style="border: 0px; box-shadow: 0 0 0 0; vertical-align: middle" width="80%" src="images/docker.png"/>
+			<aside class="notes">
+			* Docker: Linux containers ++
+			* Specify software as layers: Ubuntu + PostgreSQL + Galaxy
+			* Build specification is (typically) via Dockerfile
+			</aside>
+			</section>
+
+			<section>
+			<img src="images/dockerfile.png"/>
+			<aside class="notes">
+			* Allows composition of machine image
+			* Compile, distribute, run everywhere
+			</aside>
+			</section>
+
+			<section>
+			<img src="images/galaxy_flavours.png"/>
+			<aside class="notes">
+			* Bjoern Gruening, University of Freiberg
+			* Moving more towards the admin:
+			* Galaxy Flavours
+			* Everything, wrapped up in a Docker container
+			* Specified by Dockerfile that builds Galaxy from Galaxy source + command line installer for tools
+			* Good for providing relatively fixed Galaxy instance
+			</aside>
+			</section>
+
+			<section>
+			<a href="http://www.benjamenwhite.com/2015/07/biojs2galaxy-a-step-by-step-guide/"><img src="images/biojs2galaxy.png"/></a>
+			<p>Visualisation powered by <a href="http://biojs.io/">BioJS</a></p>
+			<aside class="notes">
+			* Sebastian Wilzbach, Technical University Munich
+			* Much BioJS work Developed at The Genome Analysis Centre, TGAC
+			* BioJS is a community oriented project for developing Javascript visualisation components for bioinformatics
+			* BioJS2Galaxy binds BioJS visualisations to Galaxy data types
+			</aside>
+			</section>
+			<section>
+			<img src="images/collections.png"/>
+			<aside class="notes">
+			* Announced at GCC2014, Dataset collections facilitate MapReduce processing of data:
+			* Push to extend tool support for collections to tools provided by Galaxy devteam and Intergalactic Utilities Commission (community)
+			* List / Pair / List of Pairs
+			* First step towards new execution model in Galaxy, revealing need for changes in UI, provenance tracking, backend execution
+			</aside>
+			</section>
+
+			<section>
+			<img src="images/galaxy_big_workflow.jpg"/ width="100%">
+			<aside class="notes">
+			* Current Galaxy workflows are abstraction intolerant
+			* No sub-workflows (work during GCC2015 hackathon)
+			* Workflow components have received relatively little attention in recent years
+			* Change from "Galaxy is a workflow engine" 2010 paper to "Galaxy isn't a workflow engine" 2012 GCC
+			</aside>
+			</section>
+
+			<section>
+			<img src="images/increasing_utility_galaxy_workflows_bosc2015.png"/>
+			<p>John Chilton's <a href="https://www.youtube.com/watch?v=4ETL81P6p_g">presentation</a> at BOSC 2015</p>
+			<aside class="notes">
+			* What I like to call the Galaxy 10,000 problem
+			* Currently Galaxy workflows map to tasks on the backend
+			* Large collections threaten to overwhelm scheduler
+			* As you grow workflow system starts looking more and more like a (dataflow or pure functional) language
+			</aside>
+			</section>
+
+			<section>
+			<img src="images/kepler.png"/>
+			<aside class="notes">
+			* Galaxy didn't get here first
+			* Extensive literature on workflow systems that many are not aware of
+			* Kepler model of "pluggable directors" provides a powerful abstraction
+			* Not every execution is alike
+			</aside>
+			</section>
+			
+			<section>
+			<img src="images/kepler_comad.png"/>
+			<aside class="notes">
+			* COMAD extension to Kepler (Shawn Bowers and Timothy McPhillips)
+			* Need to provide first class support for selecting, filtering, transforming collections in workflows
+			* Manesh Anand's work on provenance recording as logic language statements maps quite closely to provenance as graph in graph DB
+
+			</aside>
+			</section>
+
+			<section>
+			<a href="http://www.slideshare.net/moJoe/discovery-and-analysis-capability-model
+"><img src="images/discovery-workflow.jpg"/></a>
+			<p>Slide adapted from <a href="http://radar.oreilly.com/2013/09/data-analysis-just-one-component-of-the-data-science-workflow.html">Ben Lorica</a></p>
+			<aside class="notes">
+			* Data model in Galaxy is data/type to data/type
+			* To integrate workflow with insight requires integrating workflow system with model storage and query system
+			* Possibly embed Galaxy workflow (e.g. Refinery https://github.com/parklab/refinery-platform)
+			</aside>
+			</section>
+
+			<section>
+			<h2>What next?</h2>
+			<ul>
+			<li>SANBI cluster support for Docker (October 2015)
+			<li>Implement RNASeq and genome annotation in Galaxy workflows
+			<li>BioJS already in use in Bass Explorer (bassex) at SANBI, increase use and contribute
+			<li>Re-engineer Galaxy workflow engine (results by mid 2016)
+			</section>
+
+			<section>
+			<h2>Thank you</h2>
+			<p><a href="http://gcc2015.tsl.ac.uk/"><img style="border: 0px; box-shadow: 0 0 0 0; vertical-align: middle" src="http://gcc2015.tsl.ac.uk/wp-content/uploads/2014/11/nav_logo.png"/>GCC 2015</a></p>
+			<p>Many thanks to Alan Christoffels and Olabode Ajayi for supporting and collaborating on this research.</p>
+			</section>
+			</div>
+			</div>
+
+
 
 		</div>
 
-		<script>
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
 
-		  ga('create', 'UA-43375306-1', 'revealjs.com');
-		  ga('send', 'pageview');
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
 		</script>
+
 	</body>
 </html>
