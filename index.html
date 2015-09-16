@@ -166,7 +166,73 @@ Compose:
 			* First step towards new execution model in Galaxy, revealing need for changes in UI, provenance tracking, backend execution
 			</aside>
 			</section>
+
+			<section>
+			<img src="images/galaxy_big_workflow.jpg"/ width="100%">
+			<aside class="notes">
+			* Current Galaxy workflows are abstraction intolerant
+			* No sub-workflows (work during GCC2015 hackathon)
+			* Workflow components have received relatively little attention in recent years
+			* Change from "Galaxy is a workflow engine" 2010 paper to "Galaxy isn't a workflow engine" 2012 GCC
+			</aside>
+			</section>
+
+			<section>
+			<img src="images/increasing_utility_galaxy_workflows_bosc2015.png"/>
+			<p>John Chilton's <a href="https://www.youtube.com/watch?v=4ETL81P6p_g">presentation</a> at BOSC 2015</p>
+			<aside class="notes">
+			* What I like to call the Galaxy 10,000 problem
+			* Currently Galaxy workflows map to tasks on the backend
+			* Large collections threaten to overwhelm scheduler
+			* As you grow workflow system starts looking more and more like a (dataflow or pure functional) language
+			</aside>
+			</section>
+
+			<section>
+			<img src="images/kepler.png"/>
+			<aside class="notes">
+			* Galaxy didn't get here first
+			* Extensive literature on workflow systems that many are not aware of
+			* Kepler model of "pluggable directors" provides a powerful abstraction
+			* Not every execution is alike
+			</aside>
+			</section>
 			
+			<section>
+			<img src="images/kepler_comad.png"/>
+			<aside class="notes">
+			* COMAD extension to Kepler (Shawn Bowers and Timothy McPhillips)
+			* Need to provide first class support for selecting, filtering, transforming collections in workflows
+			* Manesh Anand's work on provenance recording as logic language statements maps quite closely to provenance as graph in graph DB
+
+			</aside>
+			</section>
+
+			<section>
+			<a href="http://www.slideshare.net/moJoe/discovery-and-analysis-capability-model
+"><img src="images/discovery-workflow.jpg"/></a>
+			<p>Slide adapted from <a href="http://radar.oreilly.com/2013/09/data-analysis-just-one-component-of-the-data-science-workflow.html">Ben Lorica</a></p>
+			<aside class="notes">
+			* Data model in Galaxy is data/type to data/type
+			* To integrate workflow with insight requires integrating workflow system with model storage and query system
+			* Possibly embed Galaxy workflow (e.g. Refinery https://github.com/parklab/refinery-platform)
+			</aside>
+			</section>
+
+			<section>
+			<h2>What next?</h2>
+			<ul>
+			<li>SANBI cluster support for Docker (October 2015)
+			<li>Implement RNASeq and genome annotation in Galaxy workflows
+			<li>BioJS already in use in Bass Explorer (bassex) at SANBI, increase use and contribute
+			<li>Re-engineer Galaxy workflow engine (results by mid 2016)
+			</section>
+
+			<section>
+			<h2>Thank you</h2>
+			<p><a href="http://gcc2015.tsl.ac.uk/"><img style="border: 0px; box-shadow: 0 0 0 0; vertical-align: middle" src="http://gcc2015.tsl.ac.uk/wp-content/uploads/2014/11/nav_logo.png"/>GCC 2015</a></p>
+			<p>Many thanks to Alan Christoffels and Olabode Ajayi for supporting and collaborating on this research.</p>
+			</section>
 			</div>
 			</div>
 
